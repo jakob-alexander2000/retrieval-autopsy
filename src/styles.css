@@ -45,7 +45,7 @@ button { cursor: pointer; }
 .skip {
   position: absolute;
   left: var(--space-4);
-  top: -40px;
+  top: -100px;
   background: var(--ink);
   color: var(--paper);
   padding: var(--space-2) var(--space-3);
@@ -68,7 +68,7 @@ button { cursor: pointer; }
   margin: 0 0 var(--space-4);
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: normal;
   text-transform: uppercase;
 }
 
@@ -106,7 +106,7 @@ label, legend {
   text-transform: uppercase;
 }
 
-.ask label, .document label { display: block; margin-bottom: var(--space-2); }
+.ask > label, .document label { display: block; margin-bottom: var(--space-2); }
 
 input[type="text"], input:not([type]), textarea, #question {
   width: 100%;
@@ -122,13 +122,39 @@ textarea {
   line-height: 1.45;
 }
 
+.ask-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+.ask-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
 .chips {
   list-style: none;
   padding: 0;
-  margin: var(--space-4) 0;
+  margin: var(--space-4) 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-3);
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .chip, .label-row button, .jump {
@@ -160,11 +186,13 @@ fieldset { border: 0; margin: var(--space-4) 0; padding: 0; }
 .choice input { width: 18px; height: 18px; accent-color: var(--accent); }
 
 .run {
+  flex: 0 0 auto;
   min-height: 48px;
   padding: 0 22px;
   background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--ink);
+  white-space: nowrap;
 }
 
 .run:disabled {
