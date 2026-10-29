@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "test:py": "python3 -m pip install -q -e ./scorer pytest && python3 -m pytest scorer/tests -q",
+    "test:py": "python3 -m venv .venv && .venv/bin/python -m pip install -q -e ./scorer pytest && .venv/bin/python -m pytest scorer/tests -q",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run build && npm run test:e2e && npm run test:py"
   },
   "dependencies": {

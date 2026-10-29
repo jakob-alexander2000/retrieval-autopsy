@@ -221,11 +221,12 @@ export function App() {
             </ul>
             <button
               type="button"
-              className="chip more"
+              className="more"
               data-testid="more-questions"
               aria-expanded={moreQuestions}
               onClick={() => setMoreQuestions((open) => !open)}
             >
+              <span aria-hidden="true">{moreQuestions ? "▾" : "▸"}</span>
               More questions
             </button>
             {picked ? <p className="quiet">{QUESTIONS.find((item) => item.id === picked)?.note}</p> : null}

@@ -68,7 +68,7 @@ button { cursor: pointer; }
   margin: 0 0 var(--space-4);
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: normal;
   text-transform: uppercase;
 }
 
@@ -106,7 +106,7 @@ label, legend {
   text-transform: uppercase;
 }
 
-.ask label, .document label { display: block; margin-bottom: var(--space-2); }
+.ask > label, .document label { display: block; margin-bottom: var(--space-2); }
 
 input[type="text"], input:not([type]), textarea, #question {
   width: 100%;
@@ -144,7 +144,17 @@ textarea {
 }
 
 .more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-top: var(--space-3);
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .chip, .label-row button, .jump {

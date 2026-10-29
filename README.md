@@ -68,7 +68,7 @@ Commit `92cb0f52e9f8b463a92f60adde4486595467fe41` (“Add Retrieval Autopsy”):
 - Lazy loading of the in-browser model (`src/retrieve/embed.ts`).
 - `/api/answer` on a Worker, with a per-isolate rate limit and the extractive answer as the fallback (`worker/`).
 - `wrangler.jsonc`, unit tests, the Playwright trap test, `fixtures/answers.jsonl`, the Dockerfile, and both GitHub workflows.
-- The recording under `docs/retrieval-autopsy.gif` (about 4.6 seconds) and the screenshots next to it.
+- The recording under `docs/retrieval-autopsy.gif` (about 3.4 seconds), plus `docs/desktop-1440x900.png` and `docs/mobile-390x844.png`.
 
 ### What I decided
 

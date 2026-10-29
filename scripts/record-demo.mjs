@@ -21,6 +21,7 @@ const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 
 const desktopPage = await desktop.newPage();
 await showTrap(desktopPage);
 await desktopPage.screenshot({ path: "docs/desktop-1440x900.png" });
+await desktopPage.locator(".choices").first().screenshot({ path: "/tmp/radios.png" });
 await desktop.close();
 
 const mobile = await browser.newContext({
@@ -35,22 +36,21 @@ await mobile.close();
 
 const videoContext = await browser.newContext({
   viewport: { width: 1280, height: 800 },
-  recordVideo: { dir: "docs", size: { width: 1280, height: 800 } },
+  recordVideo: { dir: "docs", size: { width: 960, height: 600 } },
 });
 const videoPage = await videoContext.newPage();
 await videoPage.goto(base);
-await videoPage.waitForTimeout(400);
+await videoPage.waitForTimeout(900);
 await videoPage.getByTestId("question-leave").click();
-await videoPage.waitForTimeout(500);
+await videoPage.waitForTimeout(350);
 await videoPage.getByTestId("mode-naive").click();
-await videoPage.waitForTimeout(400);
+await videoPage.waitForTimeout(250);
 await videoPage.getByTestId("run").click();
 await videoPage.getByTestId("check-qualifier-status").waitFor();
-await videoPage.waitForTimeout(700);
 await videoPage.locator("mark[data-span='full-time employees only']").evaluate((el) => {
-  el.scrollIntoView({ block: "center", behavior: "smooth" });
+  el.scrollIntoView({ block: "center" });
 });
-await videoPage.waitForTimeout(2200);
+await videoPage.waitForTimeout(1600);
 const video = videoPage.video();
 await videoContext.close();
 const videoPath = await video.path();
