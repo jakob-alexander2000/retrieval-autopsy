@@ -1,6 +1,6 @@
 # Retrieval Autopsy
 
-Show exactly where a document-answering bot picks the wrong passage or drops a condition, before its customers find out.
+See where a document-answering bot drops a condition, and where keyword and meaning search pick different passages.
 
 ![The annual-leave question. Keyword search finds the passage. The answer drops “full-time employees only”, and Qualifier fails.](docs/retrieval-autopsy.gif)
 
@@ -21,7 +21,7 @@ Open the local page. The sample handbook is already loaded. It is synthetic. It 
 
 Keyword search finds the passage. The answer says employees receive 30 days, and leaves out **full-time employees only**. Qualifier fails, and those words are marked in the passage.
 
-You can paste your own text instead of the sample. **Keeps the wording** copies sentences out of the top passage. **Drops conditions** strips limits on purpose, so a failure is visible. **Server model, if one is configured** calls `/api/answer` and, if that is not available, falls back to the wording from the passage.
+You can paste your own text instead of the sample. **Keeps the wording** copies sentences out of the top passage. **Drops conditions** strips limits on purpose, so a failure is visible. The server model is not in the default build. A build with `VITE_SERVER_MODEL=1` adds it. It calls `/api/answer` and, if that is not available, uses the wording from the passage.
 
 Meaning search downloads a small model the first time (`Xenova/all-MiniLM-L6-v2`). It runs in the browser. The handbook is not uploaded. Keyword results show up without waiting for it.
 
@@ -115,7 +115,9 @@ npx wrangler@4 deploy
 - `compatibility_date`: `2026-10-01`
 - `assets.directory`: `./dist`, with single-page-application handling and an `ASSETS` binding
 - `main`: `./worker/index.ts` (the `/api/answer` route)
-- `ai.binding`: `AI`, used only by that route. The model is `@cf/meta/llama-3.1-8b-instruct`. If the binding is missing or the call fails, the route returns 503 and the page uses the extractive answer.
+- `ai.binding`: `AI`, used only by that route. The model is `@cf/meta/llama-3.1-8b-instruct`. On this Worker, if the binding is missing or the call fails, `/api/answer` returns 503 and the page uses the passage wording.
+
+The copy at retrieval-autopsy.vercel.app is the static build only. It has no /api/answer route, so a request there returns 404 and the page uses the passage wording.
 
 `npx wrangler deploy --dry-run` bundles the Worker and reads `./dist`. It does not publish.
 

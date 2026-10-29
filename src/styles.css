@@ -45,7 +45,7 @@ button { cursor: pointer; }
 .skip {
   position: absolute;
   left: var(--space-4);
-  top: -40px;
+  top: -100px;
   background: var(--ink);
   color: var(--paper);
   padding: var(--space-2) var(--space-3);
@@ -122,13 +122,29 @@ textarea {
   line-height: 1.45;
 }
 
+.ask-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+.ask-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
 .chips {
   list-style: none;
   padding: 0;
-  margin: var(--space-4) 0;
+  margin: var(--space-4) 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+}
+
+.more {
+  margin-top: var(--space-3);
 }
 
 .chip, .label-row button, .jump {
@@ -160,11 +176,13 @@ fieldset { border: 0; margin: var(--space-4) 0; padding: 0; }
 .choice input { width: 18px; height: 18px; accent-color: var(--accent); }
 
 .run {
+  flex: 0 0 auto;
   min-height: 48px;
   padding: 0 22px;
   background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--ink);
+  white-space: nowrap;
 }
 
 .run:disabled {
