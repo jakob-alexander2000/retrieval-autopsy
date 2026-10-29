@@ -1,0 +1,15 @@
+[project]
+name = "retrieval-autopsy"
+version = "0.1.0"
+description = "Deterministic support, scope, qualifier, and omission checks for document answers."
+requires-python = ">=3.11"
+
+[project.scripts]
+retrieval-autopsy = "retrieval_autopsy.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

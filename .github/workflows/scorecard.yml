@@ -1,0 +1,16 @@
+name: scorecard
+
+on:
+  pull_request:
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ./scorer
+      - name: Fail if the pass rate drops
+        run: retrieval-autopsy fixtures/answers.jsonl --baseline scorer/baseline.json
