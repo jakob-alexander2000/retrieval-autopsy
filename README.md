@@ -52,7 +52,7 @@ docker run --rm retrieval-autopsy fixtures/answers.jsonl --baseline scorer/basel
 
 `.github/workflows/scorecard.yml` fails a pull request when that rate drops. `.github/workflows/ci.yml` runs `npm run verify`.
 
-## What AI built and what I decided
+## How it was built
 
 Built with Cursor cloud agents.
 
@@ -70,13 +70,6 @@ Commit `92cb0f52e9f8b463a92f60adde4486595467fe41` (“Add Retrieval Autopsy”):
 - `wrangler.jsonc`, unit tests, the Playwright trap test, `fixtures/answers.jsonl`, the Dockerfile, and both GitHub workflows.
 - The recording under `docs/retrieval-autopsy.gif` (about 4.6 seconds) and the screenshots next to it.
 
-### What I decided
-
-- TODO(Jakob): why these four checks.
-- TODO(Jakob): why this handbook, and why these eight questions.
-- TODO(Jakob): whether “Drops conditions” should be the mode a visitor sees first.
-- TODO(Jakob): whether the meaning column should block the page until the model has loaded.
-- TODO(Jakob): the accent, and the name in the sample handbook.
 
 ## Limitations
 
