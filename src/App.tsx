@@ -13,6 +13,9 @@ import { Highlighted } from "./ui/Highlighted";
 import { PassageList } from "./ui/PassageList";
 import { Scorecard } from "./ui/Scorecard";
 
+const SERVER_MODEL = import.meta.env.VITE_SERVER_MODEL === "1";
+const FIRST_QUESTIONS = 4;
+
 type Source = "keyword" | "meaning";
 type Mode = "faithful" | "naive" | "cloud";
 type MeaningState =
@@ -64,6 +67,7 @@ export function App() {
   const [documentText, setDocumentText] = useState(HANDBOOK);
   const [question, setQuestion] = useState("");
   const [picked, setPicked] = useState("");
+  const [moreQuestions, setMoreQuestions] = useState(false);
   const [source, setSource] = useState<Source>("keyword");
   const [mode, setMode] = useState<Mode>("faithful");
   const [keyword, setKeyword] = useState<Hit[]>([]);
@@ -170,7 +174,7 @@ export function App() {
       <main className="wrap">
         <header className="mast">
           <p className="eyebrow"><span className="sq" aria-hidden="true" /> Retrieval autopsy</p>
-          <h1>Show exactly where a document answer picks the wrong passage or drops a condition.</h1>
+          <h1>See where a document answer drops a condition, and where keyword and meaning search pick different passages.</h1>
           <p className="dek">Paste a few pages, or use the sample handbook. No account.</p>
         </header>
 
@@ -183,19 +187,22 @@ export function App() {
         >
           <section className="ask" id="ask">
             <label htmlFor="question">Question</label>
-            <input
-              id="question"
-              type="text"
-              value={question}
-              onChange={(event) => {
-                setQuestion(event.target.value);
-                setPicked("");
-              }}
-              placeholder="Ask something the handbook might answer"
-              autoComplete="off"
-            />
+            <div className="ask-row">
+              <input
+                id="question"
+                type="text"
+                value={question}
+                onChange={(event) => {
+                  setQuestion(event.target.value);
+                  setPicked("");
+                }}
+                placeholder="Ask something the handbook might answer"
+                autoComplete="off"
+              />
+              <button className="run" type="submit" data-testid="run" disabled={!ready}>Run</button>
+            </div>
             <ul className="chips">
-              {QUESTIONS.map((item) => (
+              {(moreQuestions ? QUESTIONS : QUESTIONS.slice(0, FIRST_QUESTIONS)).map((item) => (
                 <li key={item.id}>
                   <button
                     type="button"
@@ -212,6 +219,16 @@ export function App() {
                 </li>
               ))}
             </ul>
+            <button
+              type="button"
+              className="more"
+              data-testid="more-questions"
+              aria-expanded={moreQuestions}
+              onClick={() => setMoreQuestions((open) => !open)}
+            >
+              <span aria-hidden="true">{moreQuestions ? "▾" : "▸"}</span>
+              More questions
+            </button>
             {picked ? <p className="quiet">{QUESTIONS.find((item) => item.id === picked)?.note}</p> : null}
             <fieldset>
               <legend>Answer</legend>
@@ -224,13 +241,14 @@ export function App() {
                   <input type="radio" name="mode" checked={mode === "naive"} onChange={() => chooseMode("naive")} data-testid="mode-naive" />
                   Drops conditions
                 </label>
-                <label className="choice">
-                  <input type="radio" name="mode" checked={mode === "cloud"} onChange={() => chooseMode("cloud")} data-testid="mode-cloud" />
-                  Server model, if one is configured
-                </label>
+                {SERVER_MODEL ? (
+                  <label className="choice">
+                    <input type="radio" name="mode" checked={mode === "cloud"} onChange={() => chooseMode("cloud")} data-testid="mode-cloud" />
+                    Server model, if one is configured
+                  </label>
+                ) : null}
               </div>
             </fieldset>
-            <button className="run" type="submit" data-testid="run" disabled={!ready}>Run</button>
           </section>
 
           <section className="document">
@@ -346,7 +364,7 @@ export function App() {
         </div>
         <p className="sr-only" aria-live="polite">{live}</p>
         <footer>
-          <p>The handbook stays in this browser, unless you choose the server model. That choice sends the question and the three passages to /api/answer.</p>
+          <p>The handbook stays in this browser. Meaning search downloads its model from Hugging Face and its runtime from jsDelivr. Neither receives the handbook or the question.</p>
         </footer>
       </main>
     </>
