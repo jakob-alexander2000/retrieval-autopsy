@@ -126,3 +126,7 @@ The copy at retrieval-autopsy.vercel.app is the static build only. It has no /ap
 `npx wrangler deploy --dry-run` bundles the Worker and reads `./dist`. It does not publish.
 
 Publishing with `workers_dev: true` creates a public `*.workers.dev` URL. The `/api/answer` route on that URL is public, with the per-isolate limit above. Removing the `ai` block disables the server model and leaves the rest of the page working. That deploy choice is the owner’s.
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
