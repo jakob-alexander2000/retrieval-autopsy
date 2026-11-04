@@ -8,7 +8,7 @@ It is for people who build or review a bot that answers from a document, such as
 
 ## Try it
 
-No account and no key. You need Node.js 20 or newer. From a fresh clone:
+No account and no key. You need Node.js 22 or newer. From a fresh clone:
 
 ```bash
 git clone https://github.com/jakob-alexander2000/retrieval-autopsy.git
@@ -79,14 +79,13 @@ Commit `92cb0f52e9f8b463a92f60adde4486595467fe41` (“Add Retrieval Autopsy”):
 - `wrangler.jsonc`, unit tests, the Playwright trap test, `fixtures/answers.jsonl`, the Dockerfile, and both GitHub workflows.
 - The recording under `docs/retrieval-autopsy.gif` (about 3.4 seconds), plus `docs/desktop-1440x900.png` and `docs/mobile-390x844.png`.
 
-
 ## Limitations
 
 - The checks are lexical. A paraphrase that keeps the meaning and changes the words can fail Support, or can hide a dropped limit from Qualifier.
 - Scope only notices a few widenings: “everyone”, “every worker”, and the other phrases in the checker, plus a claim that an excluded group is included. It will miss a quieter over-generalisation.
 - “Drops conditions” is a handful of string rules. It is there so a failure is obvious. It is not a model of a careless writer.
 - Keyword and meaning can disagree, and the scorecard can still pass, because it judges the answer against the passages that were retrieved, not against a passage you wish had been retrieved. Look at the two columns for that.
-- Meaning search downloads the model and its runtime on first use. The first run is slow, and it needs a network. Later runs use the browser cache. Lighthouse on the first screen does not include that download.
+- Meaning search downloads the model and its runtime on first use. The first run is slow, and it needs a network. Later runs use the browser cache. Lighthouse (Google’s page-speed audit) on the first screen does not include that download.
 - The in-memory rate limit on `/api/answer` is per isolate, eight requests a minute per address. It is not a global limit.
 - The sample is fiction. Nothing in it is a policy.
 
@@ -100,7 +99,7 @@ npm run verify
 
 `npm run verify` typechecks, lints, runs the unit tests, builds, runs the Playwright trap test, and runs pytest for `scorer/`.
 
-Checked from a fresh clone on 4 November 2026 with Node.js 20 and Python 3.13: `npm ci`, the typecheck, lint, 23 unit tests, the build, 3 Playwright tests, the scorer, and 2 pytest tests all passed.
+Checked from a fresh clone on 4 November 2026 with Node.js 22 and Python 3.13: `npm ci`, the typecheck, lint, 23 unit tests, the build, 3 Playwright tests, the scorer, and 2 pytest tests all passed.
 
 ## Deploy
 
