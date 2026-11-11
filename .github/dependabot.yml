@@ -3,14 +3,47 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
+    groups:
+      actions-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
 
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
+    groups:
+      npm-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
 
   - package-ecosystem: pip
     directory: /scorer
     schedule:
-      interval: weekly
+      interval: monthly
+    groups:
+      pip-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
