@@ -24,21 +24,21 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@playwright/test": "1.56",
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "1.65",
     "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-react": "^5.2.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^16.5.0",
     "typescript": "5.9",
-    "typescript-eslint": "^8.46.4",
+    "typescript-eslint": "^8.72.1",
     "vite": "^7.3.7",
     "vitest": "^3.2.7",
-    "wrangler": "^4.156.0"
+    "wrangler": "^4.158.0"
   },
   "overrides": {
     "tinypool": "2.2.0"
